@@ -1,0 +1,47 @@
+body {
+  font-family: sans-serif;
+  color: 	#383838;
+  font-size: 11pt;
+}
+
+button:active, button:visited, button:focus, button:hover, button {
+  outline: none;
+}
+
+button {
+  border: none;
+}
+
+.app-wrapper {
+  display: grid;
+  grid-template-areas: 
+  "h h"
+  "n c";
+  grid-template-rows: 60px 1fr;
+  grid-template-columns: 2fr 10fr;
+  width: 100vw;
+  height: 100vh;
+}
+
+.content-wrapper{
+  grid-area: c;
+  padding: 20px 100px;
+}
+
+.login-wrapper {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 4fr 1fr;
+  grid-template-areas: 
+    "a";
+  background: linear-gradient(rgba(255,255,255,0.6), rgba(255,255,255,0.6)), 
+    url('./assets/paws-fon.jpg') repeat; 
+  width: 100vw;
+  height: 100vh;
+}
+
+.login{
+  grid-area: a;
+  align-self: center;
+  justify-self: center;
+}

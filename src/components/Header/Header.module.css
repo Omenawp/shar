@@ -1,0 +1,50 @@
+.header {
+    grid-area: h;
+    background: #EADEDB;
+    display: grid;
+    grid-template-areas: 
+    "i r";
+    grid-template-columns: 1fr 1fr;
+    font-size: 11pt;
+}
+.right {
+    grid-area: r;
+    justify-self: end;
+    align-self: center;
+    margin-right: 100px;
+}
+
+.header img {
+    margin-left: 100px;
+    grid-area: i;
+    height: 100%;
+}
+
+.button, .name {
+    display: inline-block;
+    text-align: center;
+    font-weight: bold;
+}
+
+.button {
+    border-radius: 3px;
+    background-color:  #6B5B95;
+    padding: 7px;
+    color: white;
+}
+.button:hover{
+    cursor: pointer;
+}
+
+.name {
+    margin-right: 20px;
+    text-decoration: none;
+    color:#383838;
+    padding: 7px;
+    border-radius: 3px;
+    border: 1.3px solid transparent;
+}
+
+.name:hover{
+    border: 1.3px solid white;
+}

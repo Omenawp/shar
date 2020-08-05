@@ -1,0 +1,25 @@
+.profile img {
+    width: 200px;
+    float: left;
+    margin-right: 20px;
+}
+
+.profile > div {
+    margin-bottom: 5px;
+}
+
+.name {
+    font-weight: 600;
+}
+
+.status {
+    font-style: italic;
+}
+
+.statusChange:focus {
+    outline: none;
+    border-radius: 3px;
+    border: 1.5px solid #BC70A4;
+    color: #383838;
+    padding: 5px;
+}

@@ -1,0 +1,24 @@
+.nav{
+    grid-area: n;
+    margin-left: 100px;
+}
+
+.item a{
+    display: inline-block;
+    text-decoration: none;
+    color:#383838;
+    margin-top: 20px;
+    border: 1.3px solid transparent;
+    padding: 5px 10px;
+    border-radius: 3px;
+}
+
+.item a:hover{
+    border: 1.3px solid #6B5B95;
+}
+
+.item .active {
+    background:  #6B5B95;
+    color: white;
+}
+

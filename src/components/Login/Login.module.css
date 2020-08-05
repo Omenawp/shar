@@ -1,0 +1,82 @@
+.block {
+    background-color: white;
+    border-radius: 3px;
+    padding: 30px 35px 35px;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.4);
+    width: 380px;
+}
+
+.title{
+    font-family: sans-serif;
+    font-size: 14pt;
+    font-weight: 700;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.formItem {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.label {
+    font-size: 11pt;
+    margin-bottom: 5px;
+}
+
+.formItem input {
+    padding: 0 6px;
+    font-size: 11pt;
+    border: 1px solid #DCDCDC;
+    width: 95%;
+    height: 35px;
+}
+.formItem input:focus{
+    outline: 0;
+    border: 1px solid #A9A9A9;
+}
+
+.block form {
+    display: block;
+    margin-bottom: 20px;
+}
+
+.buttons button {
+    border-radius: 30px;
+    border: transparent;
+    background-color:  #BC70A4;
+    color: white;
+    font-weight: bold;
+}
+
+.buttons button:hover{
+    background-color: #BFD641;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+}
+
+.buttons > * {
+    font-size: 12pt;
+    padding: 8px 40px;
+}
+
+.buttons a{
+    display: inline-block;
+    color: black;
+}
+
+.error {
+    font-size: 10pt;
+    border: 2px solid #DC143C;
+    margin-bottom: 20px;
+    text-align: center;
+    padding: 20px;
+}
+
+.preloader {
+    width: 40px;
+    padding: 0;
+}

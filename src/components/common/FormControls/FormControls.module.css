@@ -1,0 +1,18 @@
+.error input{
+    border: 1px solid #DC143C !important;
+    /*display: inline-block;*/
+}
+
+.error {
+    position: relative;
+}
+
+.errorMes {
+    position: absolute;
+    top: -30px;
+    right: 0px;
+    font-size: 10pt;
+    padding: 5px;
+    background-color: #DC143C;
+    color: white;
+}
