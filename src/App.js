@@ -30,7 +30,7 @@ class App extends React.Component {
           <Route path='/users' render={() => <UsersContainer />} />
           <Route path='/login' render={() => <Login />} />
           <Route path='/register' render={() => <Signup />} />
-          {/* <Route path='/'><Redirect to={'/profile'} /> </Route> */}
+          <Route path='/'><Redirect to={'/login'} /> </Route>
         </div> 
       </div>
     )

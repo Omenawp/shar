@@ -1,9 +1,8 @@
 import { MeAPI } from '../api/api';
 import { stopSubmit, startSubmit } from 'redux-form';
 
-const storageName = 'userData'
 const SET_USER_DATA = 'SET-USER-DATA';
-
+const storageName = 'userData';
 
 let initialState = {
     userId: null,
@@ -31,10 +30,7 @@ export const setAuthUserData = (userId, email, name, isAuth) => ({
 
 export const getAuthUserData = () => {
     return (dispatch) => {
-        const data = JSON.parse(localStorage.getItem(storageName));
-        let token = (data != null) ? data.token : '';
-
-        return MeAPI.authMe(token).then(data => {
+        return MeAPI.authMe().then(data => {
             if (data.resultCode === 0) {
                 let { id, email, name } = data.data;
                 dispatch(setAuthUserData(id, email, name, true));
@@ -80,10 +76,7 @@ export const register = (obj) => {
 
 export const logout = () => {
     return (dispatch) => {
-        const data = JSON.parse(localStorage.getItem(storageName));
-        let token = (data != null) ? data.token : '';
-
-        MeAPI.logout(token).then( data => {
+        MeAPI.logout().then( data => {
             if(data.resultCode === 0 ) {
                 localStorage.removeItem(storageName);
                 dispatch(setAuthUserData(null, null, null, false))
@@ -92,4 +85,4 @@ export const logout = () => {
     }
 }
 
-export default authReducer
+export default authReducer;

@@ -9,7 +9,7 @@ import { register } from '../../redux/auth-reducer';
 
 
 const SignupForm = (props) => {
-    if(props.error == 0) return <Redirect to={'/login'} />
+    if(props.error === 0) return <Redirect to={'/login'} />
 
     return (
         <form onSubmit={props.handleSubmit}>

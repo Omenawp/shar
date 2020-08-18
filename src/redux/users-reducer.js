@@ -1,6 +1,5 @@
 import { UsersAPI } from "../api/api";
 
-const storageName = 'userData';
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET-USERS';
@@ -94,10 +93,8 @@ export const updateSearchText = (text) => ({type: UPDATE_SERCH_TEXT, text})
 export const recieveUsers = (pageSize, currentPage, searchText) => {
     return (dispatch) => {
         dispatch(toggleIsFetching(true));
-        const data = JSON.parse(localStorage.getItem(storageName));
-        let token = (data != null) ? data.token : '';
 
-        UsersAPI.getUsers(token, pageSize, currentPage, searchText).then(data => {
+        UsersAPI.getUsers(pageSize, currentPage, searchText).then(data => {
             if(data.items.length !== 0) {
                 let maxPage = Math.ceil(data.count/pageSize);
                 dispatch(setPages(currentPage, maxPage));
@@ -112,10 +109,7 @@ export const follow = (userId) => {
     return (dispatch) => {
         dispatch(toggleFollowingProgress(true, userId));
 
-        const data = JSON.parse(localStorage.getItem(storageName));
-        let token = (data != null) ? data.token : '';
-
-        UsersAPI.follow(token, userId).then(data => {
+        UsersAPI.follow(userId).then(data => {
             if(data.resultCode === 0) {
                 dispatch(toggleFollowingProgress(false, userId));
                 dispatch(followAccept(userId));
@@ -128,10 +122,7 @@ export const unfollow = (userId) => {
     return (dispatch) => {
         dispatch(toggleFollowingProgress(true, userId));
 
-        const data = JSON.parse(localStorage.getItem(storageName));
-        let token = (data != null) ? data.token : '';
-
-        UsersAPI.unfollow(token, userId).then(data => {
+        UsersAPI.unfollow(userId).then(data => {
             if(data.resultCode === 0) {
                 dispatch(toggleFollowingProgress(false, userId));
                 dispatch(unfollowAccept(userId));

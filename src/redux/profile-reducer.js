@@ -2,7 +2,6 @@ import { ProfileAPI } from "../api/api";
 
 const SET_USER_PROFILE = 'SET-USER-PROFILE';
 const SET_STATUS = 'SET-STATUS';
-const storageName = 'userData'
 
 let initialState = {
     profile: null,
@@ -39,11 +38,8 @@ export const getProfile = (userId) => {
 }
 
 export const updateStatus = (status) => {
-    const data = JSON.parse(localStorage.getItem(storageName));
-    const token = data.token || '';
-
     return (dispatch) => {
-        ProfileAPI.updateStatus(status, token).then(response => {
+        ProfileAPI.updateStatus(status).then(response => {
             if(response.data.resultCode === 0)
                 dispatch(setStatus(status))
         })

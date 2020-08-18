@@ -22,7 +22,7 @@ const ProfileStatus = (props) => {
     return (
         <>
         {!editMode && 
-            <span onDoubleClick={ props.authUser && toggleEditMode } > "{status || 'empty' }" </span>
+            <span onDoubleClick={ props.authUser && toggleEditMode } > {status || 'No status...' } </span>
         }
         
         {editMode && 

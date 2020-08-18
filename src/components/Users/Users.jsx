@@ -46,7 +46,7 @@ const Users = (props) => {
             </div>)}
             
             {props.isFetching? <img src={preloader} alt=""/> :
-                (props.currentPage != props.maxPage) &&
+                (props.currentPage !== props.maxPage) &&
                 <button className={s.next} onClick={ () => {props.nextUsersPage(props.currentPage + 1) } } >Next</button>
             } 
         </div>
