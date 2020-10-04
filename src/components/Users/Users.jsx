@@ -31,7 +31,7 @@ const Users = (props) => {
         <div>
             {props.users.map(u => <div key={u.id} className={s.item}>
                 <NavLink to={'/profile/'+u.id} className={s.info}>
-                    <img src={photo} alt={u.id}/>
+                    <img src={u.photos.small || photo} alt={u.id}/>
                     <div>
                         <div className={s.name}>{u.name}</div>
                         <div className={s.status}>{ cropStatus(u.status) }</div>

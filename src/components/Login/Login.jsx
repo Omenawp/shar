@@ -8,10 +8,7 @@ import { login } from '../../redux/auth-reducer';
 import s from './Login.module.css';
 import preloader from '../../assets/preloader.svg';
 
-
-
 const LoginForm = (props) => {
-    console.log(props.submitting)
     return (
         <form onSubmit={props.handleSubmit}>
             <div className={s.formItem}>
