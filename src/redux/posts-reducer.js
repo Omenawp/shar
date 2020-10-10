@@ -8,7 +8,7 @@ const TOGGLE_IN_PROGRESS = 'TOGGLE_IN_PROGRESS';
 const LIKE_DISLIKE_ACCEPT = 'LIKE_DISLIKE_ACCEPT';
 const TOGGLE_IS_FOLLOWING_PROGRESS = 'users/FOLLOWING-IN-PROGRESS';
 const SET_PAGES = 'posts/SET-PAGE';
-const RESET_STATE = 'posts/RESET_STATE';
+const RESET_POSTS = 'posts/RESET_POSTS';
 
 let initialState = {
     posts: [],
@@ -37,7 +37,11 @@ const postsReducer = (state = initialState, action) => {
         case DELETE_POST:
             return {
                 ...state,
-                posts: state.posts.filter(id => id !== action.post_id)
+                posts: state.posts.filter(p => {
+                    if(p.id !== action.post_id)
+                        return p;
+                    else return '';
+                })
             }
         case UPDATE_POSTS:
             return {
@@ -71,8 +75,11 @@ const postsReducer = (state = initialState, action) => {
                     ? [...state.followingInProgress, action.id]
                     : state.followingInProgress.filter(id => id !== action.id)
             }
-        case RESET_STATE:
-            return initialState;
+        case RESET_POSTS:
+            return {
+                ...state,
+                posts: []
+            }
         default: 
             return state;
     }
@@ -88,7 +95,7 @@ export const toggleFollowingProgress = (isFetching, id) => ({
 
 export const likeDislikeAccept = (id, bool) => ({type:LIKE_DISLIKE_ACCEPT, id, bool });
 export const setPages = (pageNumber, maxPage) => ({type: SET_PAGES, pageNumber, maxPage});
-export const resetState = () => ({type: RESET_STATE});
+export const resetPosts = () => ({type: RESET_POSTS});
 
 export const clearImage = () => {
     return async (dispatch, getState) => {
@@ -112,7 +119,6 @@ export const getAllPosts = (id, currentPage) => {
         let pageSize = getState().posts.pageSize;
         let response = await PostsAPI.allPosts(id, pageSize, currentPage);
         if(response.data.resultCode === 0){
-            let pageSize = getState().posts.pageSize;
             let maxPage = Math.ceil(response.data.count/pageSize);
             dispatch(setPages(currentPage, maxPage))
             dispatch(updatePosts(response.data.data));
@@ -123,22 +129,27 @@ export const getAllPosts = (id, currentPage) => {
 export const addPost = (text) => {
     return async (dispatch, getState) =>  {
         dispatch(toggleInProgress(true))
+        let id = getState().auth.userId;
         let response = await PostsAPI.add(text, getState().posts.preimageURL);
         if(response.data.resultCode === 0) {
-            let id = getState().auth.userId;
-            dispatch(clearImage())
-            dispatch(getAllPosts(id));
-            dispatch(toggleInProgress(false));
+            dispatch(clearImage());
+            dispatch(resetPosts());
+            dispatch(getAllPosts(id, 1));
             dispatch(toggleNewPostMode(false));
         }
+        dispatch(toggleInProgress(false));
     }
 }
 
 export const deletePost = (id_post) => {
-    return async (dispatch) => {
+    return async (dispatch, getState) => {
+        let id = getState().auth.userId;
         let response = await PostsAPI.delete(id_post);
-        if(response.data.resultCode === 0)
+        if(response.data.resultCode === 0) {
             dispatch(deletePostAC(id_post));
+            dispatch(resetPosts());
+            dispatch(getAllPosts(id, 1));
+        }
     }
 }
 

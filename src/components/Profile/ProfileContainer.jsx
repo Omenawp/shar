@@ -7,10 +7,15 @@ import { getProfile, updateStatus, toggleEditPhotoMode } from '../../redux/profi
 import { withAuthRedirect } from '../../hoc/withAuthRedirect';
 import Preloader from '../common/Preloader/Preloader';
 import Posts from './Posts/Posts';
-import { getAllPosts, toggleNewPostMode, deletePost, likePost, dislikePost, resetState } from '../../redux/posts-reducer';
+import { getAllPosts, toggleNewPostMode, deletePost, likePost, dislikePost } from '../../redux/posts-reducer';
 
 
 class ProfileContainer extends React.Component {
+    constructor(props) {
+        super(props);
+        this.userId = '';
+    }
+
     refreshProfile() {
         let userId = this.props.match.params.userId;
         if(!userId) {
@@ -19,12 +24,9 @@ class ProfileContainer extends React.Component {
                 this.props.history.push('/login');
             }
         }
+        this.userId = userId;
         this.props.getProfile(userId);
         this.props.getAllPosts(userId, this.props.currentPage);
-    }
-
-    componentWillUnmount() {
-        this.props.resetState();
     }
 
     componentDidMount () {
@@ -32,13 +34,13 @@ class ProfileContainer extends React.Component {
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        if (this.props.match.params.userId !== prevProps.match.params.userId ) {
+        if (this.props.match.params.userId !== prevProps.match.params.userId) {
             this.refreshProfile();
         }
     }
 
     render() {
-        if(this.props.profile === null || this.props.posts === null)
+        if(this.props.profile === null || this.props.profile.id != this.userId)
             return <Preloader />
 
         let authUser = (this.props.currentUserId === this.props.profile.id);
@@ -73,5 +75,5 @@ let mapStateToProps = (state) => {
 export default compose(
     connect(mapStateToProps, 
         { getProfile, updateStatus, toggleEditPhotoMode, getAllPosts, toggleNewPostMode,
-        deletePost, likePost, dislikePost, resetState }), 
+        deletePost, likePost, dislikePost }), 
         withRouter, withAuthRedirect)(ProfileContainer);

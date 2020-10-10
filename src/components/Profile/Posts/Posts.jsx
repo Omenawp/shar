@@ -19,7 +19,7 @@ const Posts = React.memo( props => {
                         <img src={props.profile.photos.small || user} alt="" className={s.userPhoto}/>
                         <div className={s.name} >{props.profile.name}</div>
                         <div className={s.data} >{p.added_on}</div>
-                        {props.authUser && <button onClick={() => props.authUser && props.delete(p.id)} 
+                        {props.authUser && <button onClick={() => props.authUser && props.deletePost(p.id)} 
                             className={s.delete}>Delete</button>
                         }
                     </div>
@@ -50,20 +50,6 @@ const Posts = React.memo( props => {
         </div>
     )
 });
-
-function AllPosts ({posts}) {
-
-    return <>
-        {/* { props.preimageURL 
-                ? <div>
-                    <img src={props.preimageURL} alt=""  width="500px"/>
-                    <button onClick={props.clearImage}>delete</button>
-                </div>
-                : <input type="file" onChange={preload} /> }
-            <input value={postText} autoFocus onChange={ onChange }></input>
-            <button onClick={addPost}>Add Post</button>  */}
-    </>
-}
 
 
 export default Posts;

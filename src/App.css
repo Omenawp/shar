@@ -49,3 +49,8 @@ button {
   align-self: center;
   justify-self: center;
 }
+
+.overflow {
+  overflow: hidden;
+  height: 100vh;
+}

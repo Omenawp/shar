@@ -23,6 +23,7 @@ class App extends React.Component {
     if(!this.props.initialized) return <Preloader />
 
     return (
+    <div className={(this.props.editPhotoMode || this.props.newPostMode) && 'overflow' }>
       <div className={this.props.isAuth? 'app-wrapper' : 'login-wrapper'}>
         {this.props.isAuth &&  <HeaderContainer /> }
         {this.props.isAuth &&  <Navbar /> }
@@ -38,6 +39,7 @@ class App extends React.Component {
           <Route path='/' render={() => <Redirect to="/profile" /> } />
         </div> 
       </div>
+    </div>
     )
   }
 }
