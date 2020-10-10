@@ -6,10 +6,15 @@ body {
 
 button:active, button:visited, button:focus, button:hover, button {
   outline: none;
+  outline-offset: 0;
 }
 
 button {
   border: none;
+  background-color: transparent;
+  color: 	#383838;
+  padding: 0px;
+  font-size: 11pt;
 }
 
 .app-wrapper {
@@ -18,14 +23,13 @@ button {
   "h h"
   "n c";
   grid-template-rows: 60px 1fr;
-  grid-template-columns: 2fr 10fr;
+  grid-template-columns: 1fr 6fr;
   width: 100vw;
-  height: 100vh;
 }
 
 .content-wrapper{
   grid-area: c;
-  padding: 20px 100px;
+  padding: 20px 10% 20px 5%;
 }
 
 .login-wrapper {

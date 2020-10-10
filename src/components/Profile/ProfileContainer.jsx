@@ -3,11 +3,11 @@ import ProfileInfo from './ProfileInfo/ProfileInfo';
 import { connect } from 'react-redux';
 import { withRouter} from 'react-router-dom';
 import { compose } from 'redux';
-import { getProfile, updateStatus, updatePhoto, deletePhoto} from '../../redux/profile-reducer';
+import { getProfile, updateStatus, toggleEditPhotoMode } from '../../redux/profile-reducer';
 import { withAuthRedirect } from '../../hoc/withAuthRedirect';
 import Preloader from '../common/Preloader/Preloader';
-import { preloadImage, changePostText, clearImage, addPost } from '../../redux/posts-reducer';
 import Posts from './Posts/Posts';
+import { getAllPosts, toggleNewPostMode, deletePost, likePost, dislikePost, resetState } from '../../redux/posts-reducer';
 
 
 class ProfileContainer extends React.Component {
@@ -20,6 +20,11 @@ class ProfileContainer extends React.Component {
             }
         }
         this.props.getProfile(userId);
+        this.props.getAllPosts(userId, this.props.currentPage);
+    }
+
+    componentWillUnmount() {
+        this.props.resetState();
     }
 
     componentDidMount () {
@@ -28,26 +33,27 @@ class ProfileContainer extends React.Component {
 
     componentDidUpdate(prevProps, prevState, snapshot) {
         if (this.props.match.params.userId !== prevProps.match.params.userId ) {
-            debugger;
             this.refreshProfile();
         }
     }
 
     render() {
-        if(this.props.profile === null)
+        if(this.props.profile === null || this.props.posts === null)
             return <Preloader />
+
+        let authUser = (this.props.currentUserId === this.props.profile.id);
 
         return <>
             <ProfileInfo profile={this.props.profile} status={this.props.status}
-            updateStatus={this.props.updateStatus} setStatus={this.props.setStatus}
-            authUserId={this.props.authUserId} updatePhoto={this.props.updatePhoto}
-            deletePhoto={this.props.deletePhoto} inProgress={this.props.inProgress}/> 
+                updateStatus={this.props.updateStatus} setStatus={this.props.setStatus}
+                authUser={authUser} toggleEditPhotoMode={this.props.toggleEditPhotoMode} /> 
 
-            {/* <Posts preloadImage={this.props.preloadImage} changePostText={this.props.changePostText}
-            postText={this.props.postText} preimageURL={this.props.preimageURL}
-            clearImage={this.props.clearImage} addPost={this.props.addPost} /> */}
-        </>
-            
+            <Posts posts={this.props.posts} authUser={authUser} 
+                toggleNewPostMode={this.props.toggleNewPostMode} profile={this.props.profile} 
+                like={this.props.likePost} dislike={this.props.dislikePost} deletePost={this.props.deletePost} 
+                followingInProgress={this.props.followingInProgress} currentPage={this.props.currentPage} 
+                maxPage={this.props.maxPage} getAllPosts={this.props.getAllPosts} />
+        </>   
     }
 }
 
@@ -57,16 +63,15 @@ let mapStateToProps = (state) => {
         status: state.profilePage.status,
         currentUserId: state.auth.userId,
         isAuth: state.auth.isAuth,
-        authUserId: state.auth.userId,
-        inProgress: state.profilePage.inProgress,
-        postText: state.posts.postText,
-        preimageURL: state.posts.preimageURL,
+        posts: state.posts.posts,
+        followingInProgress: state.posts.followingInProgress,
+        currentPage: state.posts.currentPage,
+        maxPage: state.posts.maxPage,
     }
 }
 
 export default compose(
     connect(mapStateToProps, 
-        { getProfile, updateStatus, updatePhoto, deletePhoto , preloadImage, changePostText, clearImage, addPost}), 
-        withRouter, 
-        withAuthRedirect
-    )(ProfileContainer);
+        { getProfile, updateStatus, toggleEditPhotoMode, getAllPosts, toggleNewPostMode,
+        deletePost, likePost, dislikePost, resetState }), 
+        withRouter, withAuthRedirect)(ProfileContainer);

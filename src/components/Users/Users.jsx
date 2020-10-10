@@ -1,8 +1,9 @@
 import React from 'react';
 import s from './Users.module.css';
-import photo from '../../assets/totoro.png';
+import photo from '../../assets/user.jpeg';
 import { NavLink } from 'react-router-dom';
-import preloader from '../../assets/preloader.svg';
+import next from '../../assets/next.png';
+import search from '../../assets/search.png';
 
 const Users = (props) => {
     const cropStatus = (status) => {
@@ -17,21 +18,23 @@ const Users = (props) => {
         props.updateSearchText(text);
     }
 
-
     return <div className={s.content}>
 
-        <div className={s.search} >
+        <div className={s.head} >
             <input onChange={ onSearchChange} ref={searchText}
-                value={props.searchText}/>
-            <button onClick={ () => props.searchUsers() } >Go</button>
+                value={props.searchText} className={s.search} 
+                placeholder="Search..." />
+            <button onClick={ () => props.searchUsers() }>
+                <img src={search} alt="" />
+            </button>
         </div>
 
         {(props.users.length !== 0 || props.isFetching) ? 
 
-        <div>
+        <div className={s.main}>
             {props.users.map(u => <div key={u.id} className={s.item}>
                 <NavLink to={'/profile/'+u.id} className={s.info}>
-                    <img src={u.photos.small || photo} alt={u.id}/>
+                    <img src={u.photos.small || photo} alt={u.id} className={s.userPhoto}/>
                     <div>
                         <div className={s.name}>{u.name}</div>
                         <div className={s.status}>{ cropStatus(u.status) }</div>
@@ -45,9 +48,11 @@ const Users = (props) => {
                     }
             </div>)}
             
-            {props.isFetching? <img src={preloader} alt=""/> :
-                (props.currentPage !== props.maxPage) &&
-                <button className={s.next} onClick={ () => {props.nextUsersPage(props.currentPage + 1) } } >Next</button>
+            {(props.currentPage !== props.maxPage)  &&
+                <button className={s.next} disabled={props.isFetching}
+                        onClick={ () => {props.nextUsersPage(props.currentPage + 1) } }>
+                    <img src={next} alt="" />
+                </button>
             } 
         </div>
         : <div className={s.error} >Not found</div>}

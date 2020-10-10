@@ -1,0 +1,115 @@
+.banner {
+    width: 100vw;
+    height: 100vh;
+    overflow:hidden;
+    position: absolute;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    z-index: 10;
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6));
+}
+
+.main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: white;
+    border-radius: 3px;
+    padding: 30px 35px ;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.4);
+    width: 550px;
+    margin-top: 5%;
+}
+
+.title {
+    text-align: center;
+    font-size: 14pt;
+    margin-bottom: 20px;
+}
+
+
+.picture {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 200px;
+}
+
+input[type=file] {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    position: absolute;
+    z-index: -10;
+}
+
+.picture label {
+    cursor: pointer;
+}
+
+.picture label img {
+    opacity: 0.2;
+}
+
+.picture:hover label img {
+    opacity: 0.8;
+}
+
+.picture, .text, .line {
+    width: 100%;
+}
+
+.line {
+    border-top: 1.5px solid gray;
+    margin: 10px 0px;
+}
+
+.text {
+    height: 80px;
+    overflow-y: auto;
+    resize: none;
+    border: none;
+    font-size: 11pt;
+}
+
+.text:active, .text:focus {
+    outline: none;
+    outline-offset: 0;
+}
+
+.loadpic {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.delete {
+    position: absolute;
+    display: none;
+}
+.picture:hover .loadpic {
+    opacity: 0.4;
+}
+.picture:hover .delete{
+    display: inline-block;
+}
+
+.buttons button{
+    padding: 8px 30px;
+    margin: 0px 20px;
+    border-radius: 30px;
+    font-weight: bold;
+    color: #DCDCDC;
+    background: transparent;
+    border: 1.5px solid #DCDCDC;
+}
+.add:hover, .cancel:hover{
+    border: 1.5px solid transparent;
+    color: white;
+}
+.add:hover {
+    background: #BFD641;
+}
+.cancel:hover {
+    background: #BC70A4;
+}

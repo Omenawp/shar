@@ -12,7 +12,8 @@ const ProfileStatus = (props) => {
     }
 
     const onChange = (e) => {
-        setStatus(e.currentTarget.value)
+        if(e.currentTarget.value.length < 100)
+            setStatus(e.currentTarget.value)
     }
 
     useEffect( () => {
@@ -22,12 +23,14 @@ const ProfileStatus = (props) => {
     return (
         <>
         {!editMode && 
-            <span onDoubleClick={ props.authUser && toggleEditMode } > {status || 'No status...' } </span>
+            <span onDoubleClick={ props.authUser && toggleEditMode } className={status || s.empty}> 
+                {status || ( props.authUser && 'Type your status here..') } 
+            </span>
         }
         
         {editMode && 
-            <input autoFocus='true' onChange={ onChange } onBlur={ toggleEditMode } 
-                    value={status} className={s.statusChange} ></input>
+            <textarea autoFocus onChange={ onChange } onBlur={ toggleEditMode } 
+                    value={status || ''} className={s.statusChange} wrap="soft"></textarea>
         }
         </>
     )

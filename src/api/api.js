@@ -58,7 +58,7 @@ export const UsersAPI = {
             {headers: {'Authorization': `Bearer ${getToken()}`}}).then(response=> response.data)
     },
     follow(userId) {
-        return instance.post(`follow/${userId}`, {}, {headers: {'Authorization': `Bearer ${getToken()}`}})
+        return instance.post(`follow/${userId}`,'', {headers: {'Authorization': `Bearer ${getToken()}`}})
             .then(response => response.data)
     },
     unfollow(userId) {
@@ -77,8 +77,21 @@ export const PostsAPI = {
     clear(url) {
         return instance.post('post/clear', {url}, {headers: {'Authorization': `Bearer ${getToken()}`}});
     },
-    add(text, url, tegs) {
-        return instance.post('post/add', {text, url, tegs}, {headers: {'Authorization': `Bearer ${getToken()}`}});
+    add(text, url) {
+        return instance.post('post/add', {text, url}, {headers: {'Authorization': `Bearer ${getToken()}`}});
+    },
+    delete(id_post) {
+        return instance.delete(`post/${id_post}`, {headers: {'Authorization': `Bearer ${getToken()}`}});
+    },
+    like(id_post) {
+        return instance.post(`like/${id_post}`, {} ,{headers: {'Authorization': `Bearer ${getToken()}`}});
+    },
+    dislike(id_post) {
+        return instance.delete(`like/${id_post}`, {headers: {'Authorization': `Bearer ${getToken()}`}});
+    },
+    allPosts(id_post, pageSize, currentPage) {
+        return instance.get(`posts?id_post=${id_post}&limit=${pageSize}&page=${currentPage} `, 
+            {headers: {'Authorization': `Bearer ${getToken()}`}});
     }
 }
 

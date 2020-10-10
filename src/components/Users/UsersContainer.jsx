@@ -7,7 +7,8 @@ import { withAuthRedirect } from '../../hoc/withAuthRedirect';
 
 class UsersContainer extends React.Component {
     componentDidMount() {
-        this.props.recieveUsers(this.props.pageSize, this.props.currentPage, this.props.searchText)
+        if(this.props.users.length === 0)
+            this.props.recieveUsers(this.props.pageSize, this.props.currentPage, this.props.searchText)
     }
 
     nextUsersPage = (page) => {

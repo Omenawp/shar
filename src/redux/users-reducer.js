@@ -42,7 +42,7 @@ const usersReducer = (state = initialState, action) => {
         case SET_USERS:
             return {
                 ...state,
-                users: [...state.users,...action.users]
+                users: [...state.users, ...action.users]
             }
         case SET_PAGES:
             return {
@@ -106,28 +106,26 @@ export const recieveUsers = (pageSize, currentPage, searchText) => {
 }
 
 export const follow = (userId) => {
-    return (dispatch) => {
+    return async (dispatch) => {
         dispatch(toggleFollowingProgress(true, userId));
 
-        UsersAPI.follow(userId).then(data => {
-            if(data.resultCode === 0) {
-                dispatch(toggleFollowingProgress(false, userId));
-                dispatch(followAccept(userId));
-            }
-        })
+        let data = await UsersAPI.follow(userId);
+        if(data.resultCode === 0) {
+            dispatch(followAccept(userId));
+        }
+        dispatch(toggleFollowingProgress(false, userId));
     }
 }
 
 export const unfollow = (userId) => {
-    return (dispatch) => {
+    return async (dispatch) => {
         dispatch(toggleFollowingProgress(true, userId));
 
-        UsersAPI.unfollow(userId).then(data => {
-            if(data.resultCode === 0) {
-                dispatch(toggleFollowingProgress(false, userId));
-                dispatch(unfollowAccept(userId));
-            }
-        })
+        let data = await UsersAPI.unfollow(userId);
+        if(data.resultCode === 0) {
+            dispatch(unfollowAccept(userId))
+        }
+        dispatch(toggleFollowingProgress(false, userId));
     }
 }
 

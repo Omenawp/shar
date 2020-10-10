@@ -44,7 +44,10 @@ const Login = (props) => {
         props.login(obj)
     }
 
-    if(props.isAuth) return <Redirect to={'/profile'}/>
+    console.log(props.isAuth)
+    if(props.isAuth) {
+        return <Redirect to="/profile" />
+    }
 
     return (
         <div className={s.block}>

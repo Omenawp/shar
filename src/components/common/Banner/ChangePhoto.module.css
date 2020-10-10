@@ -1,0 +1,55 @@
+.banner {
+    width: 100vw;
+    height: 100vh;
+    overflow:hidden;
+    position: absolute;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    z-index: 10;
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6));
+}
+
+.main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: white;
+    border-radius: 3px;
+    padding: 30px 35px 35px;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.4);
+    width: 300px;
+    margin-top: 10%;
+}
+
+.item {
+    display: inline-block;
+    padding: 6px;
+    margin-top: 6px;
+    position: relative;
+    border: 2px solid transparent;
+}
+
+.item:hover {
+    color: #BC70A4;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.item label:hover {
+    cursor: pointer;
+}
+
+.title {
+    text-align: center;
+    font-size: 14pt;
+    margin-bottom: 20px;
+}
+
+.item input[type=file] {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    position: absolute;
+    z-index: -10;
+}

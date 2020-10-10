@@ -1,0 +1,102 @@
+.main {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.add{
+    opacity: 0.2;
+    cursor: pointer;
+    margin: 10px 0px;
+    width: 32px;
+}
+
+.add:hover {
+    opacity: 0.8;
+}
+
+.post {
+    position: relative;
+    width: 60%;
+    min-width: 400px;
+    border-bottom: 1.5px solid #DCDCDC;
+    padding: 20px;
+}
+.userPhoto {
+    width: 50px;
+    border-radius: 50%;
+    float: left;
+    margin-right: 10px;
+}
+.name {
+    padding-top: 5px;
+    font-weight: 600;
+}
+.data {
+    font-size: 10pt;
+}
+.main * button {
+    padding: 0;
+    background-color: transparent;
+}
+
+.head {
+    position: relative;
+}
+
+.delete {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    opacity: 0.2;
+    color: 	#383838;
+    cursor: pointer;
+}
+.delete:hover {
+    opacity: 1;
+}
+
+.text {
+    clear: both;
+    padding: 10px 0px;
+}
+.picture {
+    max-width: 400px;
+    max-height: 300px;
+}
+.like {
+    position: absolute;
+    right: 20px;
+    bottom: 0px;
+}
+.like button {
+    margin-right: 5px;
+    width: 16px;
+}
+
+.like img, .delete img {
+    width: 16px;
+    cursor: pointer;
+}
+
+.like button:disabled {
+    opacity: 0.2;
+}
+
+.next {
+    background: transparent;
+    border: 1.5px solid #DCDCDC;
+    padding: 8px 30px;
+    border-radius: 30px;
+    margin: 50px 0px;
+    cursor: pointer;
+    font-weight: bold;
+    color: #DCDCDC;
+}
+
+.next:hover {
+    border: 1.5px solid transparent;
+    color: white;
+    background-color:#BFD641;
+}
+

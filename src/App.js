@@ -11,6 +11,8 @@ import ProfileContainer from './components/Profile/ProfileContainer';
 import UsersContainer from './components/Users/UsersContainer';
 import Navbar from './components/Navbar/Navbar';
 import Signup from './components/Signup/Signup';
+import ChangePhoto from './components/common/Banner/ChangePhoto';
+import NewPost from './components/common/Banner/NewPost';
 
 class App extends React.Component {
   componentDidMount() {
@@ -25,12 +27,15 @@ class App extends React.Component {
         {this.props.isAuth &&  <HeaderContainer /> }
         {this.props.isAuth &&  <Navbar /> }
 
+        {this.props.editPhotoMode && <ChangePhoto /> }
+        {this.props.newPostMode && <NewPost /> }
+
         <div className={this.props.isAuth? 'content-wrapper' : 'login'}>
           <Route path='/profile/:userId?' render={() => <ProfileContainer />} exact/>
-          <Route path='/users' render={() => <UsersContainer />} />
-          <Route path='/login' render={() => <Login />} />
-          <Route path='/register' render={() => <Signup />} />
-          <Route path='/'><Redirect to={'/login'} /> </Route>
+          <Route path='/users' render={() => <UsersContainer />} exact/>
+          <Route path='/login' render={() => <Login />} exact/>
+          <Route path='/register' render={() => <Signup />} exact/>
+          <Route path='/' render={() => <Redirect to="/profile" /> } />
         </div> 
       </div>
     )
@@ -40,7 +45,9 @@ class App extends React.Component {
 const mapStateToProps = (state) => {
   return {
     initialized: state.app.initialized,
-    isAuth: state.auth.isAuth
+    isAuth: state.auth.isAuth,
+    editPhotoMode: state.profilePage.editPhotoMode,
+    newPostMode: state.posts.newPostMode,
   }
 }
 

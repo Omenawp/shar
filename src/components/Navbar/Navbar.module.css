@@ -1,24 +1,28 @@
 .nav{
     grid-area: n;
-    margin-left: 100px;
+    margin-left: 50%;
 }
 
 .item a{
     display: inline-block;
     text-decoration: none;
-    color:#383838;
+    color:#A9A9A9;
     margin-top: 20px;
-    border: 1.3px solid transparent;
-    padding: 5px 10px;
-    border-radius: 3px;
+    border: 1.5px solid transparent;
+    padding: 8px 20px;
+    border-radius: 30px;
 }
 
 .item a:hover{
-    border: 1.3px solid #6B5B95;
+    font-weight: bold;
+    color:white;
+    background-color: #525252;
+    border: 1.5px solid transparent;
 }
 
 .item .active {
-    background:  #6B5B95;
-    color: white;
+    color:#383838;
+    font-weight: bold;
+    border: 1.5px solid #A9A9A9;
 }
 
